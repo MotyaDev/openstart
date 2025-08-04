@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenStart</title>
+    <style>
+        :root {
+            --primary-color: #2B6CB0;
+            --accent-color: #E6F0FF;
+            --border-radius: 8px;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: white;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            margin: 20px auto;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 30%;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        h1 {
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .search-bar {
+            width: 60%;
+            padding: 12px 16px;
+            font-size: 1rem;
+            border: 2px solid var(--primary-color);
+            border-radius: var(--border-radius);
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 2px rgba(43, 109, 176, 0.2);
+        }
+
+        .search-engine-select {
+            width: 25%;
+            padding: 8px;
+            font-size: 0.9rem;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius);
+            background: #f9f9f9;
+        }
+
+        .features-section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-top: 4rem;
+            border-radius: var(--border-radius);
+            background: var(--accent-color);
+            padding: 2rem;
+        }
+
+        .feature {
+            text-align: center;
+            flex: 1;
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background: white;
+            color: var(--primary-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .btn:hover {
+            filter: brightness(0.95);
+        }
+
+        .privacy-message {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .privacy-message button {
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">OpenStart</div>
+            <h1>The world's most universal search engine.</h1>
+            
+            <div class="search-container">
+                <form id="searchForm">
+                    <input type="text" class="search-bar" placeholder="Search privately" value="Search privately">
+                </form>
+                
+                <select id="searchEngine" class="search-engine-select">
+                    <option value="https://duckduckgo.com/search?q=%s">DuckDuckGo</option>
+                    <option value="https://startpage.com/do/search?query=%s">Startpage</option>
+                    <option value="https://www.google.com/search?q=%s">Google</option>
+                    <option value="https://ya.ru/search/?text=%s">Yandex (unprivate)</option>
+                </select>
+            </div>
+        </header>
+
+        <div class="features-section">
+            <div class="feature">
+                <div class="feature-icon">&#128279;</div>
+                <p>Browse privately with your mobile app.</p>
+                <button class="btn">Soon</button>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">&#127968;</div>
+                <p>Make OpenStart your default search engine.</p>
+                <button class="btn btn-primary">Soon</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="privacy-message">
+        <span>OpenStart now in open beta🎉</span>
+        <button>&#10006;</button>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const query = encodeURIComponent(document.querySelector('.search-bar').value);
+            const engine = document.getElementById('searchEngine').value;
+            window.location.href = engine.replace('%s', query);
+        });
+
+        document.querySelector('.privacy-message button').addEventListener('click', function() {
+            document.querySelector('.privacy-message').style.display = 'none';
+        });
+    </script>
+</body>
+</html>
